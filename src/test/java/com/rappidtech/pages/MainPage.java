@@ -141,7 +141,7 @@ public class MainPage {
 
     /**
      * This Method will check if the shopping cart badge is empty or not
-     * If its empty then the element doesnt exist on the page , if it has a value the it will be displayed
+     * If its empty then the element doesnt exist on the page , if it has a value then it will be displayed
      * @return true if the badge is not displayed in the UI(meaning empty , no items) , false if the badge has items added to cart
      */
     public boolean checkShoppingCartBadgeIsEmpty(){

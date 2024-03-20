@@ -1,5 +1,6 @@
 package com.rappidtech.pages;
 
+import com.rappidtech.utilities.Driver;
 import com.rappidtech.utilities.SeleniumUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,11 +16,10 @@ public class CartPage {
 
     /**
      * Constructor to initialize the webdriver and elements on the page
-     * @param driver is the driver that need to be passed when we create object of the Login page
      */
-    public CartPage(WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+    public CartPage(){
+
+        PageFactory.initElements(Driver.getDriver(), this);
     }
 
 
