@@ -10,15 +10,13 @@ Feature: Login to Sauce Demo
     When User enters valid user name "standard_user" and valid password "secret_sauce"
     Then user should be able to see the main page logo
     And user should be able to verify the list of links
-
-      | "https://twitter.com/saucelabs"                |
-      | "https://www.facebook.com/saucelabs"           |
-      | "https://www.linkedin.com/company/sauce-labs/" |
-
+      | https://twitter.com/saucelabs                |
+      | https://www.facebook.com/saucelabs           |
+      | https://www.linkedin.com/company/sauce-labs/ |
 
 
   Scenario: User is not able to login with inValid UserName and Password
-    When User enters invalid user name "locked_out_user" and invalid password "invalid_secret_sauce"
-    Then user should verify the errors message "Sorry, this user has been locked out." is displayed
+    When User enters invalid user name "locked_out_user" and invalid password "secret_sauce"
+    Then user should verify the errors message "Epic sadface: Sorry, this user has been locked out." is displayed
 
 
