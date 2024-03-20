@@ -32,36 +32,33 @@ public class SeleniumUtils {
 
     /**
      * This method will use explicit wait to wait for an element to be visible
-     * @param driver instance of the browser
      * @param elementToWaitFor the element we want to wait for
      */
-    public static void waitForVisibilityOfElement(WebDriver driver , WebElement elementToWaitFor){
+    public static void waitForVisibilityOfElement(WebElement elementToWaitFor){
         logger.info("Waiting for an element until its visible");
         Long secondToWaitFor = Long.parseLong(ConfigurationReader.getProperty("explicitWait"));
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(secondToWaitFor));
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(secondToWaitFor));
         wait.until(ExpectedConditions.visibilityOf(elementToWaitFor));
     }
 
     /**
      * This method will use explicit wait to wait for an element to be selected
-     * @param driver instance of the browser
      * @param elementToWaitFor the element we want to wait for
      */
-    public static void waitForElementToBeSelected(WebDriver driver , WebElement elementToWaitFor){
+    public static void waitForElementToBeSelected(WebElement elementToWaitFor){
         logger.info("Waiting for an element until its visible");
         Long secondToWaitFor = Long.parseLong(ConfigurationReader.getProperty("explicitWait"));
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(secondToWaitFor));
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(secondToWaitFor));
         wait.until(ExpectedConditions.elementToBeSelected(elementToWaitFor));
     }
 
     /**
      * This method will wait for an element until its visible using Fluent Wait
-     * @param driver instance of the browser
      * @param elementToWaitFor element in the page to wait for its visibility
      */
-    public static void fluentWaitForElementVisibility(WebDriver driver , WebElement elementToWaitFor){
+    public static void fluentWaitForElementVisibility(WebElement elementToWaitFor){
         logger.info("Waiting using Fluent wait for an element until its visible");
-        FluentWait<WebDriver> wait = new FluentWait<>(driver) ;
+        FluentWait<WebDriver> wait = new FluentWait<>(Driver.getDriver()) ;
         wait.withTimeout(Duration.ofSeconds(10))
                 .pollingEvery(Duration.ofSeconds(2))// checking every two seconds , first time checks at 0 if element is visible  then checks again at 2s then at 4s then at 6s etc... until 10 seconds max is reached
                 .ignoring(ElementNotInteractableException.class);
@@ -71,18 +68,17 @@ public class SeleniumUtils {
 
     /**
      * This method takes a screenshot and returns the filepath to the png file
-     * @param driver THis is the driver that needs to pass to the method at runtime
      * @param screenShotName This is the screenshot name
      * @return the path to the screenshot that was taken
      */
-    public static String  getScreenShotPath(WebDriver driver, String screenShotName){
+    public static String  getScreenShotPath(String screenShotName){
         logger.info("Taking Screen shot and returning path of the image");
         String path;
         String finalPath;
         // below code will get the current date in below format and return a string representation and assign it to date variable
         String date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
         //This below code will take a screenshot with the help of TakesScreenshot interface
-        TakesScreenshot ts = (TakesScreenshot) driver;
+        TakesScreenshot ts = (TakesScreenshot) Driver.getDriver();
         //This below code will output the screenshot as a file type
         File sourceFile = ts.getScreenshotAs(OutputType.FILE);
         //Specify the path were we want to paste our screenshot
@@ -130,15 +126,14 @@ public class SeleniumUtils {
 
     /**
      * Switch to new window/tab
-     * @param driver instance of the browser
      */
-    public static void switchToNewWindow(WebDriver driver) {
+    public static void switchToNewWindow() {
         logger.info("Switching to new tab/window");
-        Set s = driver.getWindowHandles();
+        Set s = Driver.getDriver().getWindowHandles();
         Iterator itr = s.iterator();
         String w1 = (String) itr.next();
         String w2 = (String) itr.next();
-        driver.switchTo().window(w2);
+        Driver.getDriver().switchTo().window(w2);
     }
     /**
      * Switch to old window/tab
@@ -154,31 +149,28 @@ public class SeleniumUtils {
     }
     /**
      * Switch to default window/tab
-     * @param driver instance of the browser
      */
-    public static void switchToParentWindow(WebDriver driver) {
+    public static void switchToParentWindow() {
         logger.info("Switching to default tab/window");
-        driver.switchTo().defaultContent();
+        Driver.getDriver().switchTo().defaultContent();
     }
 
     /**
      * Click on element using javascriptExecutor
-     * @param driver instance of the browser
      * @param element the element we want to click
      */
-    public static void clickElementWithJavaScriptExecutor(WebDriver driver, WebElement element){
+    public static void clickElementWithJavaScriptExecutor(WebElement element){
         logger.info("Clicking on element using JS");
-        JavascriptExecutor js =  (JavascriptExecutor) driver;
+        JavascriptExecutor js =  (JavascriptExecutor) Driver.getDriver();
         js.executeScript("arguments[0].click()", element);
     }
     /**
      * highlight on element using javascriptExecutor
-     * @param driver instance of the browser
      * @param element the element we want to highlight
      */
-    private static void highlightElement(WebDriver driver, WebElement element) {
+    private static void highlightElement(WebElement element) {
         logger.info("highlight on element using JS");
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         // Execute JavaScript code to apply a border and change background color
         js.executeScript("arguments[0].setAttribute('style', 'border: 2px solid red; background-color: yellow;');", element);
         // Wait for a short duration to see the highlighted effect (optional)
@@ -192,50 +184,46 @@ public class SeleniumUtils {
     }
     /**
      * scroll to an element using javascriptExecutor
-     * @param driver instance of the browser
      * @param element the element we want to scroll to
      */
-    public static void scrollToElementUsingJavaScriptExecutor(WebDriver driver, WebElement element){
+    public static void scrollToElementUsingJavaScriptExecutor(WebElement element){
         logger.info("scroll to an element using JS");
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         js.executeScript("arguments[0].scrollIntoView();",element);
     }
 
     /**
      * scroll to central view of the element using javascriptExecutor
-     * @param driver instance of the browser
      * @param element the element we want to scroll to
      */
-    public static void scrollElementToCenterView(WebDriver driver, WebElement element) {
+    public static void scrollElementToCenterView(WebElement element) {
         logger.info("scroll to center of an element using JS");
         String scrollElementIntoMiddle = "var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);"
                 + "var elementTop = arguments[0].getBoundingClientRect().top;"
                 + "window.scrollBy(0, elementTop-(viewPortHeight/2));";
-        ((JavascriptExecutor) driver).executeScript(scrollElementIntoMiddle, element);
+        ((JavascriptExecutor) Driver.getDriver()).executeScript(scrollElementIntoMiddle, element);
     }
 
     /**
      * This method will drag an element from location and drop it into another location
      * using basic drag and drop method
-     * @param driver instance of the browser
      * @param fromWebElement from which element
      * @param toWebElement to which element
      */
-    public static void dragAndDrop(WebDriver driver ,WebElement fromWebElement, WebElement toWebElement) {
+    public static void dragAndDrop(WebElement fromWebElement, WebElement toWebElement) {
         logger.info("Drag and drop element");
-        Actions builder = new Actions(driver);
+        Actions builder = new Actions(Driver.getDriver());
         builder.dragAndDrop(fromWebElement, toWebElement);
     }
     /**
      * This method will drag an element from location and drop it into another location
      * using action class and movetoelement
-     * @param driver instance of the browser
      * @param fromWebElement from which element
      * @param toWebElement to which element
      */
-    public static void dragAndDrop_Method2(WebDriver driver ,WebElement fromWebElement, WebElement toWebElement) {
+    public static void dragAndDrop_Method2(WebElement fromWebElement, WebElement toWebElement) {
         logger.info("Drag and drop element");
-        Actions builder = new Actions(driver);
+        Actions builder = new Actions(Driver.getDriver());
         Action dragAndDrop = builder.clickAndHold(fromWebElement)
                 .moveToElement(toWebElement).release(toWebElement).build();
         dragAndDrop.perform();
@@ -243,13 +231,12 @@ public class SeleniumUtils {
     /**
      * This method will drag an element from location and drop it into another location
      * using clickAndHold method
-     * @param driver instance of the browser
      * @param fromWebElement from which element
      * @param toWebElement to which element
      */
-    public static void dragAndDrop_Method3(WebDriver driver ,WebElement fromWebElement, WebElement toWebElement) {
+    public static void dragAndDrop_Method3(WebElement fromWebElement, WebElement toWebElement) {
         logger.info("Drag and drop element");
-        Actions builder = new Actions(driver);
+        Actions builder = new Actions(Driver.getDriver());
         builder.clickAndHold(fromWebElement).moveToElement(toWebElement)
                 .perform();
         builder.release(toWebElement).build().perform();
@@ -257,26 +244,24 @@ public class SeleniumUtils {
 
     /**
      * THis method will hover to an element using action class
-     * @param driver instance of the browser
      * @param HovertoWebElement element we want to hover to
      * @throws InterruptedException
      */
-    public static void hoverWebelement(WebDriver driver ,WebElement HovertoWebElement) {
+    public static void hoverWebelement(WebElement HovertoWebElement) {
         logger.info("Hover to an element");
-        Actions builder = new Actions(driver);
+        Actions builder = new Actions(Driver.getDriver());
         builder.moveToElement(HovertoWebElement).perform();
 
     }
 
     /**
      * This method will double click an element using action class
-     * @param driver instance of the browser
      * @param doubleclickonWebElement element we want to double click
      * @throws InterruptedException
      */
-    public static void doubleClickWebelement(WebDriver driver ,WebElement doubleclickonWebElement) {
+    public static void doubleClickWebelement(WebElement doubleclickonWebElement) {
         logger.info("double click on an element");
-        Actions builder = new Actions(driver);
+        Actions builder = new Actions(Driver.getDriver());
         builder.doubleClick(doubleclickonWebElement).perform();
     }
 

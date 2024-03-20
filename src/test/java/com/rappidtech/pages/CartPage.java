@@ -62,7 +62,7 @@ public class CartPage {
      */
     public boolean isContinueButtonDisplayed(){
         logger.info("Check is the continue button is displayed or not");
-        SeleniumUtils.waitForVisibilityOfElement(driver , continueButton);
+        SeleniumUtils.waitForVisibilityOfElement(continueButton);
         return continueButton.isDisplayed();
     }
 
@@ -72,7 +72,7 @@ public class CartPage {
      */
     public boolean isCheckoutButtonDisplayed(){
         logger.info("Check is the checkout button is displayed or not");
-        SeleniumUtils.waitForVisibilityOfElement(driver , checkoutButton);
+        SeleniumUtils.waitForVisibilityOfElement(checkoutButton);
         return checkoutButton.isDisplayed();
     }
 
@@ -82,7 +82,7 @@ public class CartPage {
      */
     public boolean isQtyLabelDisplayed(){
         logger.info("Check is the qty label is displayed or not");
-        SeleniumUtils.waitForVisibilityOfElement(driver , qtyLabel);
+        SeleniumUtils.waitForVisibilityOfElement(qtyLabel);
         return qtyLabel.isDisplayed();
     }
 
@@ -92,7 +92,7 @@ public class CartPage {
      */
     public boolean isDescriptionLabelDisplayed(){
         logger.info("Check is the Description label is displayed or not");
-        SeleniumUtils.waitForVisibilityOfElement(driver , descriptionLabel);
+        SeleniumUtils.waitForVisibilityOfElement(descriptionLabel);
         return descriptionLabel.isDisplayed();
     }
 

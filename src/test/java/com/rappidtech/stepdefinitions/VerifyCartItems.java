@@ -17,12 +17,13 @@ public class VerifyCartItems {
         mainPage.clickOnShoppingCartLinkIcon();
     }
 
-    @Then("user should verify that below labels are displayed")
-    public void user_should_verify_that_below_labels_are_displayed(List<String> buttons) {
-
-            Assert.assertTrue(cartPage.isCheckoutButtonDisplayed());
-            Assert.assertTrue(cartPage.isContinueButtonDisplayed());
-
+    @Then("user should verify that continue shopping button is displayed")
+    public void user_should_verify_that_continue_shopping_button_is_displayed() {
+        Assert.assertTrue(cartPage.isCheckoutButtonDisplayed());
+    }
+    @And("user should verify that Checkout button is displayed")
+    public void user_should_verify_that_checkout_button_is_displayed() {
+        Assert.assertTrue(cartPage.isContinueButtonDisplayed());
     }
 
 
