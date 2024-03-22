@@ -1,5 +1,6 @@
 package com.rappidtech.pages;
 
+import com.rappidtech.utilities.Driver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -14,11 +15,10 @@ public class CheckoutOverViewPage {
 
     /**
      * Constructor to initialize the webdriver and elements on the page
-     * @param driver is the driver that need to be passed when we create object of the Login page
      */
-    public CheckoutOverViewPage(WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+    public CheckoutOverViewPage(){
+
+        PageFactory.initElements(Driver.getDriver(), this);
     }
 
 
