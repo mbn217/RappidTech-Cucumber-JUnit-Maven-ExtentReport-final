@@ -41,9 +41,9 @@ public class VerifyCheckoutOverviewPage {
     public void user_should_be_able_to_verify_that_shipping_information_label_is_displayed() {
         Assert.assertTrue(checkoutOverViewPage.isShippingInformationLabelDisplayed());
     }
-    @And("user should be able to verify that {string} Label is Displayed")
-    public void user_should_be_able_to_verify_that_total_$_label_is_displayed(String totalPrice) {
-
+    @And("user should be able to verify that Total: {string} Label is Displayed")
+    public void user_should_be_able_to_verify_that_total_$_label_is_displayed(String expectedTotalPrice) {
+        Assert.assertEquals(checkoutOverViewPage.getTotalPrice(), expectedTotalPrice);
     }
 
 }

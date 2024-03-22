@@ -12,4 +12,4 @@ Feature: Verify Checkout Overview
     And user clicks on the continue button in checkout Page
     Then user should be able to verify that Payment Information Label is Displayed
     And user should be able to verify that Shipping Information Label is Displayed
-    And user should be able to verify that "Total: $43.18" Label is Displayed
+    And user should be able to verify that Total: "$43.18" Label is Displayed
