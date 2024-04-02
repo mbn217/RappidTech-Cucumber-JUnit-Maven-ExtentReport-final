@@ -1,3 +1,4 @@
+@smoke
 Feature: Login to Sauce Demo
 
   As a user I want to verify if the user is able to login or not
