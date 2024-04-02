@@ -1,5 +1,6 @@
 Feature: Verify Checkout Overview
 
+  @regression
   Scenario: Verify That the Item is added in the checkout overview page
     Given User is navigated successfully to Sauce Demo Main page
     When User Clicks on Add to cart for the Item "Sauce Labs Backpack"
