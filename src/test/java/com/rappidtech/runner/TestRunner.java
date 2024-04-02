@@ -13,7 +13,9 @@ import org.junit.runner.RunWith;
                 "json:target/RappidTech-report.json",
                 "me.jvt.cucumber.report.PrettyReports:target/RappidTech-report",
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-        dryRun = false
+        dryRun = false,
+        tags = "@integration and not @regression" //and ,or , not
+
 )
 public class TestRunner {
 

@@ -1,5 +1,6 @@
 Feature: Verify Checkout Page
 
+  @smoke
   Scenario: Verify The label in the checkout page
     Given User is navigated successfully to Sauce Demo Main page
     And user clicks on the Shopping cart Icon
