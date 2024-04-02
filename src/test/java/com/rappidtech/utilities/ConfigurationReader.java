@@ -29,6 +29,26 @@ public class ConfigurationReader {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        /**
+         * The first for loop uses the keySet() method to iterate over the keys of the Properties object.
+         * It then retrieves the corresponding value using getProperty(keyStr) and checks
+         * if there is a system property with the same key. If a system property is found,
+         * it overrides the value in the Properties object. However, this loop does not directly set the system properties.
+         */
+        for(Object key : configFile.keySet()){
+            String keyStr = (String) key ;
+            String value = configFile.getProperty(keyStr);
+
+            String systemPropertyValue = System.getProperty(keyStr);
+            if(systemPropertyValue !=null && !systemPropertyValue.isEmpty()){
+                configFile.setProperty(keyStr ,systemPropertyValue);
+            }
+
+        }
+
+
+
     }
 
     /**
