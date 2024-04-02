@@ -1,5 +1,6 @@
 Feature: Verify Item in Cart
 
+  @regression
   Scenario: Verify One item is added into the Cart Page
     Given User is navigated successfully to Sauce Demo Main page
     When User Clicks on Add to cart for the Item "Sauce Labs Backpack"
