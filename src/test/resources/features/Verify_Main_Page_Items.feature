@@ -1,6 +1,7 @@
 Feature: Check Item in the Main Page
   User should be able to see the items in the main page
 
+  @integration
   Scenario: User is able to see the list of items in the main page
     Given User is navigated successfully to Sauce Demo Main page
     Then User is able to see the list of Labels
