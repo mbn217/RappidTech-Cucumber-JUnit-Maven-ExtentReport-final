@@ -9,6 +9,12 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Driver class that will take care of the logic for the WebDriver and getting instances of the driver back
@@ -52,6 +58,28 @@ public class Driver {
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
                     firefoxOptions.addArguments("-headless");
                     driver = new FirefoxDriver(firefoxOptions);
+                    break;
+                case "remote-grid-chrome":
+                    URL url = null;
+                    try {
+                        url = new URL("http://localhost:4444/wd/hub");
+                    } catch (MalformedURLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    ChromeOptions gridOptions = new ChromeOptions();
+                    driver = new RemoteWebDriver(url , gridOptions);
+                    break;
+
+                case "aws-server":
+                    URL urlaws = null;
+                    try {
+                        urlaws = new URL("http://172.31.51.98:4444");
+                    } catch (MalformedURLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    ChromeOptions awsgridOptions = new ChromeOptions();
+                    awsgridOptions.addArguments("Proxy","null");
+                    driver = new RemoteWebDriver(urlaws , awsgridOptions);
                     break;
                 default:
                     logger.info("Starting a Chrome browser");
