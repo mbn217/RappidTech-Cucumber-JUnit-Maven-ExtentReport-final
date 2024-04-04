@@ -22,10 +22,10 @@ public class CheckoutOverViewPage {
     }
 
 
-    @FindBy(xpath = "//div[.='Payment Information']")
+    @FindBy(xpath = "//div[.='Payment Information:']")
     WebElement paymentInformationLabel;
 
-    @FindBy(xpath = "//div[.='Shipping Information']")
+    @FindBy(xpath = "//div[.='Shipping Information:']")
     WebElement shippingInformationLabel;
 
     @FindBy(xpath = "//div[contains(text(),'Total:')]")
