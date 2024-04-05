@@ -73,12 +73,11 @@ public class Driver {
                 case "aws-server":
                     URL urlaws = null;
                     try {
-                        urlaws = new URL("http://172.31.51.98:4444");
+                        urlaws = new URL("http://ec2-100-27-10-98.compute-1.amazonaws.com:4444/wd/hub");
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);
                     }
                     ChromeOptions awsgridOptions = new ChromeOptions();
-                    awsgridOptions.addArguments("Proxy","null");
                     driver = new RemoteWebDriver(urlaws , awsgridOptions);
                     break;
                 default:
